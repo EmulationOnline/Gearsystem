@@ -16,13 +16,13 @@
 extern "C" {
 #endif
 
-extern void YM2413Init(void);
-extern void YM2413ResetChip(void);
-extern int YM2413Update(void);
-extern void YM2413Write(unsigned int a, unsigned int v);
-extern unsigned int YM2413Read(void);
-extern unsigned char *YM2413GetContextPtr(void);
-extern unsigned int YM2413GetContextSize(void);
+void YM2413Init(void);
+void YM2413ResetChip(void);
+int YM2413Update(void);
+void YM2413Write(unsigned int a, unsigned int v);
+unsigned int YM2413Read(void);
+unsigned char *YM2413GetContextPtr(void);
+unsigned int YM2413GetContextSize(void);
 
 #ifdef __cplusplus
 }

@@ -46,7 +46,9 @@ to do:
 #include <string.h>
 #include <math.h>
 
+#ifndef M_PI
 #define M_PI    3.14159265358979323846264338327950288
+#endif
 
 #define FREQ_SH 16  /* 16.16 fixed point (frequency calculations) */
 #define EG_SH   16  /* 16.16 fixed point (EG timing)              */
@@ -80,6 +82,8 @@ to do:
 #define EG_SUS      2
 #define EG_REL      1
 #define EG_OFF      0
+
+#define UNMANGLE extern "C"
 
 typedef struct 
 {
@@ -1701,6 +1705,7 @@ static void OPLLWriteReg(int r, int v)
 }
 
 
+UNMANGLE
 void YM2413Init(void)
 {
   init_tables();
@@ -1712,6 +1717,7 @@ void YM2413Init(void)
   OPLL_initalize();
 }
 
+UNMANGLE
 void YM2413ResetChip(void)
 {
   int c,s;
@@ -1753,6 +1759,7 @@ void YM2413ResetChip(void)
 
 /* YM2413 I/O interface */
 
+UNMANGLE
 void YM2413Write(unsigned int a, unsigned int v)
 {
   if( !(a&2) )
@@ -1775,12 +1782,14 @@ void YM2413Write(unsigned int a, unsigned int v)
   }
 }
 
+UNMANGLE
 unsigned int YM2413Read(void)
 {
   /* bit 0 returns latched FM enable status, bits 1-2 return zero (Master System / Mark-III FM adapter specific) */
   return 0xF8 | ym2413.status;
 }
 
+UNMANGLE
 int YM2413Update(void)
 {
   int out;
@@ -1817,11 +1826,13 @@ int YM2413Update(void)
   return out;
 }
 
+UNMANGLE
 unsigned char *YM2413GetContextPtr(void)
 {
   return (unsigned char *)&ym2413;
 }
 
+UNMANGLE
 unsigned int YM2413GetContextSize(void)
 {
   return sizeof(YM2413);
